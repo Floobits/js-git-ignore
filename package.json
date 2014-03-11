@@ -1,0 +1,42 @@
+{
+  "name": "js-git-ignore",
+  "homepage": "https://github.com/Floobits/js-git-ignore",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com:Floobits/js-git-ignore.git"
+  },
+  "contributors": [
+    "Matt Kaniaris <mkaniaris@gmail.com>"
+  ],
+  "version": "0.0.1",
+  "dependencies": {
+    "async": "0.2.x",
+    "floorine": "0.x",
+    "lodash": "2.3.x",
+    "minimatch": "0.2.x",
+    "mkdirp": "0.3.x",
+    "open": "0.x"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "preferGlobal": false,
+  "bin": {
+    "js-git-ignore": "./bin/js-git-ignore"
+  },
+  "directories": {
+    "lib": "./lib"
+  },
+  "scripts": {
+    "start": "./bin/js-git-ignore"
+  },
+  "bugs": {
+    "url": "https://github.com/Floobits/js-git-ignore/issues"
+  },
+  "licenses": [
+    {
+      "type": "Apache 2.0",
+      "url": "https://github.com/Floobits/js-git-ignore/blob/master/LICENSE"
+    }
+  ]
+}
