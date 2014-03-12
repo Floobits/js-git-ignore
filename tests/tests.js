@@ -18,7 +18,7 @@ exports.tests = {
 
     test.expect(1);
     this.ignore.isIgnored(p, function(err, res) {
-      test.ok(!res, 'stuff should be ignored');
+      test.ok(res, 'stuff should be ignored');
       test.done();
     });
   },
@@ -67,5 +67,47 @@ exports.tests = {
       test.ok(!res, p + " was ignored?");
       test.done();
     });
+  },
+  star: function (test) {
+    var self = this, p = path.join(self.path, "efefefeee.txt");
+
+    test.expect(1);
+    this.ignore.addRule("*.txt");
+    this.ignore.isIgnored(p, function(err, res) {
+      test.ok(res, p + " was not ignored?");
+      test.done();
+    });
+  },
+  starstar: function (test) {
+    var self = this, p = path.join(self.path, "a/b/efefefeee.txt");
+
+    test.expect(1);
+    this.ignore.addRule("a/**/*.txt");
+    this.ignore.isIgnored(p, function(err, res) {
+      test.ok(res, p + " was ignored?");
+      test.done();
+    });
+  },
+  starstar2: function (test) {
+    var self = this, p = path.join(self.path, "b/b/efefefeee.txt");
+
+    test.expect(1);
+    this.ignore.addRule("a/**/*.txt");
+    this.ignore.isIgnored(p, function(err, res) {
+      test.ok(!res, p + " was ignored?");
+      test.done();
+    });
+  },
+  negation: function (test) {
+    var self = this, p = path.join(self.path, "a");
+
+    test.expect(1);
+    this.ignore.addRule("!a");
+    this.ignore.addRule("a");
+    this.ignore.isIgnored(p, function(err, res) {
+      test.ok(!res, p + " was ignored?");
+      test.done();
+    });
   }
+
 };
