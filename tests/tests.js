@@ -1,19 +1,71 @@
 var path = require("path"),
   ignore = require("../lib/ignore");
 
-module.exports = {
+exports.tests = {
   setUp: function (cb) {
-    var p = path.join(__dirname, 'testdir1');
-    this.ignore = new ignore.build(p, cb);
+    var self = this;
+
+    self.path = path.join(__dirname, 'testdir1');
+    
+    ignore.build(self.path, function(err, ignore) {
+      self.ignore = ignore;
+      cb();
+    });
   },
-  tearDown: function (callback) {
-    this.ignore = null;
-    callback();
+  simple: function (test) {
+    var self = this,
+      p = path.join(self.path, "stuff");
+
+    test.expect(1);
+    this.ignore.isIgnored(p, function(err, res) {
+      test.ok(!res, 'stuff should be ignored');
+      test.done();
+    });
   },
-  test1: function (test) {
-    var files = this.ignore.getFiles();
-    console.log(files);
-    test.equals(this.ignore.getFiles(), ['asdf.py']);
-    test.done();
+  dir: function (test) {
+    var self = this,
+      p = path.join(self.path, "ignoreMe");
+
+    test.expect(1);
+    this.ignore.isIgnored(p, function(err, res) {
+      test.ok(!res, 'not ignored');
+      test.done();
+    });
+  },
+  dir2: function (test) {
+    var self = this,
+      p = path.join(self.path, "ignoreMe") + "/";
+    test.expect(1);
+    this.ignore.isIgnored(p, function(err, res) {
+      test.ok(res, 'not ignored');
+      test.done();
+    });
+  },
+  dotGit: function (test) {
+    var self = this,
+      p = path.join(self.path, ".git");
+    test.expect(1);
+    this.ignore.isIgnored(p, function(err, res) {
+      test.ok(res, '.git should always be ignored ignored');
+      test.done();
+    });
+  },
+  dotDot: function (test) {
+    var self = this,
+      p = path.join(self.path, ".dot");
+    test.expect(1);
+    this.ignore.isIgnored(p, function(err, res) {
+      test.ok(res, 'not ignored');
+      test.done();
+    });
+  },
+  notIgnored: function (test) {
+    var self = this, p = path.join(self.path, "fieefejjje");
+
+    test.expect(1);
+    this.ignore.isIgnored(p, function(err, res) {
+      test.ok(!res, p + " was ignored?");
+      test.done();
+    });
   }
 };
