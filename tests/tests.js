@@ -102,10 +102,21 @@ exports.tests = {
     var self = this, p = path.join(self.path, "a");
 
     test.expect(1);
+    this.ignore.addRule("a");
+    this.ignore.addRule("!a");
+    this.ignore.isIgnored(p, function(err, res) {
+      test.ok(!res, p + " was ignored?");
+      test.done();
+    });
+  },
+  reverse_negation: function (test) {
+    var self = this, p = path.join(self.path, "a");
+
+    test.expect(1);
     this.ignore.addRule("!a");
     this.ignore.addRule("a");
     this.ignore.isIgnored(p, function(err, res) {
-      test.ok(!res, p + " was ignored?");
+      test.ok(res, p + " was ignored?");
       test.done();
     });
   }
