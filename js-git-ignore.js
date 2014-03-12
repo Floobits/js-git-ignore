@@ -8,6 +8,6 @@ exports.run = function () {
   floorine.log("starting");
   ignore.writeDefaultIgnores(process.cwd());
   ignore.build(process.cwd(), function(err, i) {
-    floorine.log("all done");
+    floorine.log("\n\nFound:\n" + i.getFiles().join("\n"));
   });
 };

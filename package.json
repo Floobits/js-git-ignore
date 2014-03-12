@@ -30,7 +30,8 @@
     "lib": "./lib"
   },
   "scripts": {
-    "start": "./bin/js-git-ignore"
+    "start": "./bin/js-git-ignore",
+    "test": "./bin/test"
   },
   "bugs": {
     "url": "https://github.com/Floobits/js-git-ignore/issues"

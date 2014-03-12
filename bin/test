@@ -3,4 +3,5 @@
 var nodeunit = require('nodeunit'),
   reporter = nodeunit.reporters['default'];
 
+console.log(process.cwd());
 reporter.run(["tests"]);
