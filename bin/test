@@ -1,0 +1,6 @@
+#!/usr/bin/env node
+
+var nodeunit = require('nodeunit'),
+  reporter = nodeunit.reporters['default'];
+
+reporter.run(["tests"]);

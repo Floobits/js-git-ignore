@@ -15,6 +15,7 @@
     "lodash": "2.3.x",
     "minimatch": "0.2.x",
     "mkdirp": "0.3.x",
+    "nodeunit": "",
     "open": "0.x"
   },
   "engines": {
@@ -22,7 +23,8 @@
   },
   "preferGlobal": false,
   "bin": {
-    "js-git-ignore": "./bin/js-git-ignore"
+    "js-git-ignore": "./bin/js-git-ignore",
+    "test": "./bin/test"
   },
   "directories": {
     "lib": "./lib"
